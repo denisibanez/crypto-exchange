@@ -20,5 +20,5 @@ const i18n = createI18n({
 const pinia = createPinia();
 
 // Global test setup
-global.pinia = pinia;
-global.i18n = i18n;
+(global as any).pinia = pinia;
+(global as any).i18n = i18n;

@@ -17,3 +17,9 @@ export interface RequestConfig {
   signal?: AbortSignal;
   timeout?: number;
 }
+
+export interface ApiError {
+  message: string;
+  status?: number;
+  code?: string;
+}

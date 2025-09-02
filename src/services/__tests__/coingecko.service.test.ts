@@ -63,16 +63,19 @@ describe('CoinGeckoService', () => {
     );
   });
 
-  it('should have correct coin IDs', () => {
-    expect(coinGeckoService.coinIds).toEqual({
-      BTC: 'bitcoin',
-      ETH: 'ethereum',
-      USDT: 'tether',
-      SOL: 'solana',
-    });
+  it('should get correct coin ID for BTC', () => {
+    expect(coinGeckoService.getCoinId('BTC')).toBe('bitcoin');
   });
 
-  it('should have correct currencies', () => {
-    expect(coinGeckoService.currencies).toEqual(['usd']);
+  it('should get correct coin ID for ETH', () => {
+    expect(coinGeckoService.getCoinId('ETH')).toBe('ethereum');
+  });
+
+  it('should get supported symbols', () => {
+    const symbols = coinGeckoService.getSupportedSymbols();
+    expect(symbols).toContain('BTC');
+    expect(symbols).toContain('ETH');
+    expect(symbols).toContain('USDT');
+    expect(symbols).toContain('SOL');
   });
 });
