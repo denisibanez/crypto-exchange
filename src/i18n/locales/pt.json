@@ -1,0 +1,56 @@
+{
+  "app": {
+    "title": "Crypto Exchange",
+    "description": "Simulador profissional de câmbio de criptomoedas"
+  },
+  "navigation": {
+    "home": "Início",
+    "refresh": "Atualizar"
+  },
+  "status": {
+    "ready": "Pronto",
+    "loading": "Buscando preços…",
+    "error": "Erro: {message}"
+  },
+  "prices": {
+    "title": "Preços ao Vivo (USD)",
+    "currency": "Moeda",
+    "updated": "Atualizado: {time}",
+    "waiting": "Aguardando primeira atualização…"
+  },
+  "exchange": {
+    "title": "Câmbio",
+    "from": "De",
+    "to": "Para",
+    "amount": "Quantidade",
+    "estimated": "Estimado",
+    "execute": "Executar Câmbio",
+    "swap": "Trocar",
+    "description": "Preços são ao vivo do CoinGecko. Executar adicionará esta estimativa ao seu histórico local."
+  },
+  "history": {
+    "title": "Histórico de Câmbios",
+    "clear": "Limpar",
+    "empty": "Nenhum câmbio ainda.",
+    "rate": "Taxa: 1 {from} = {rate} {to}",
+    "usd": "USD: {fromUSD} → {toUSD}"
+  },
+  "toast": {
+    "pricesUpdated": "Preços Atualizados",
+    "pricesUpdatedMessage": "Os preços mais recentes de criptomoedas foram buscados com sucesso",
+    "pricesError": "Falha ao Atualizar Preços",
+    "pricesErrorMessage": "Não foi possível buscar os preços mais recentes de criptomoedas",
+    "exchangeExecuted": "Câmbio Executado",
+    "exchangeExecutedMessage": "{amount} {from} → {result} {to}",
+    "historyCleared": "Histórico Limpo",
+    "historyClearedMessage": "Todo o histórico de câmbios foi removido"
+  },
+  "notFound": {
+    "title": "Página Não Encontrada",
+    "description": "A página que você está procurando não existe ou foi movida.",
+    "goHome": "Voltar ao Início"
+  },
+  "footer": {
+    "description": "Preços são buscados da API CoinGecko Simple Price. Este é um app demo; nenhuma negociação real é executada."
+  }
+}

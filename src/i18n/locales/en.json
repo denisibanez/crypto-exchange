@@ -1,0 +1,56 @@
+{
+  "app": {
+    "title": "Crypto Exchange",
+    "description": "Professional-grade cryptocurrency exchange simulator"
+  },
+  "navigation": {
+    "home": "Home",
+    "refresh": "Refresh"
+  },
+  "status": {
+    "ready": "Ready",
+    "loading": "Fetching rates…",
+    "error": "Error: {message}"
+  },
+  "prices": {
+    "title": "Live Prices (USD)",
+    "currency": "Currency",
+    "updated": "Updated: {time}",
+    "waiting": "Waiting for first update…"
+  },
+  "exchange": {
+    "title": "Exchange",
+    "from": "From",
+    "to": "To",
+    "amount": "Amount",
+    "estimated": "Estimated",
+    "execute": "Execute Exchange",
+    "swap": "Swap",
+    "description": "Rates are live from CoinGecko. Executing will add this estimate to your local history."
+  },
+  "history": {
+    "title": "Exchange History",
+    "clear": "Clear",
+    "empty": "No exchanges yet.",
+    "rate": "Rate: 1 {from} = {rate} {to}",
+    "usd": "USD: {fromUSD} → {toUSD}"
+  },
+  "toast": {
+    "pricesUpdated": "Prices Updated",
+    "pricesUpdatedMessage": "Latest cryptocurrency prices have been fetched successfully",
+    "pricesError": "Failed to Update Prices",
+    "pricesErrorMessage": "Unable to fetch latest cryptocurrency prices",
+    "exchangeExecuted": "Exchange Executed",
+    "exchangeExecutedMessage": "{amount} {from} → {result} {to}",
+    "historyCleared": "History Cleared",
+    "historyClearedMessage": "All exchange history has been removed"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "The page you're looking for doesn't exist or has been moved.",
+    "goHome": "Go Back Home"
+  },
+  "footer": {
+    "description": "Prices are fetched from CoinGecko Simple Price API. This is a demo app; no real trades are executed."
+  }
+}
