@@ -37,7 +37,9 @@ describe('CoinGeckoService', () => {
     const error = new Error('Network error');
     vi.mocked(apiService.get).mockRejectedValue(error);
 
-    await expect(coinGeckoService.fetchPrices()).rejects.toThrow('Network error');
+    await expect(coinGeckoService.fetchPrices()).rejects.toThrow(
+      'Network error'
+    );
   });
 
   it('should use abort signal when provided', async () => {

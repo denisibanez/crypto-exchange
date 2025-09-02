@@ -34,7 +34,7 @@ export const Primary: Story = {
     variant: 'primary',
     size: 'md',
   },
-  render: (args) => ({
+  render: args => ({
     components: { Button },
     setup() {
       return { args };
@@ -48,7 +48,7 @@ export const Secondary: Story = {
     variant: 'secondary',
     size: 'md',
   },
-  render: (args) => ({
+  render: args => ({
     components: { Button },
     setup() {
       return { args };
@@ -62,7 +62,7 @@ export const Ghost: Story = {
     variant: 'ghost',
     size: 'md',
   },
-  render: (args) => ({
+  render: args => ({
     components: { Button },
     setup() {
       return { args };
@@ -76,7 +76,7 @@ export const Danger: Story = {
     variant: 'danger',
     size: 'md',
   },
-  render: (args) => ({
+  render: args => ({
     components: { Button },
     setup() {
       return { args };
@@ -90,7 +90,7 @@ export const Small: Story = {
     variant: 'primary',
     size: 'sm',
   },
-  render: (args) => ({
+  render: args => ({
     components: { Button },
     setup() {
       return { args };
@@ -104,7 +104,7 @@ export const Large: Story = {
     variant: 'primary',
     size: 'lg',
   },
-  render: (args) => ({
+  render: args => ({
     components: { Button },
     setup() {
       return { args };
@@ -119,7 +119,7 @@ export const Loading: Story = {
     size: 'md',
     loading: true,
   },
-  render: (args) => ({
+  render: args => ({
     components: { Button },
     setup() {
       return { args };
@@ -134,7 +134,7 @@ export const Disabled: Story = {
     size: 'md',
     disabled: true,
   },
-  render: (args) => ({
+  render: args => ({
     components: { Button },
     setup() {
       return { args };

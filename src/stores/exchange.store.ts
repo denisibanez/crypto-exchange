@@ -1,12 +1,19 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
-import type { SymbolCode, RatesUSD, ExchangeRecord, AppState } from '@/types/global';
+import type {
+  SymbolCode,
+  RatesUSD,
+  ExchangeRecord,
+  AppState,
+} from '@/types/global';
 import { coinGeckoService } from '@/services/coingecko.service';
 import { useToastStore } from './toast.store';
 import { useI18n } from '@/composables/useI18n';
 
-const STORAGE_KEY = import.meta.env.VITE_HISTORY_STORAGE_KEY || 'crypto-exchange-history-v1';
-const MAX_HISTORY_RECORDS = Number(import.meta.env.VITE_MAX_HISTORY_RECORDS) || 100;
+const STORAGE_KEY =
+  import.meta.env.VITE_HISTORY_STORAGE_KEY || 'crypto-exchange-history-v1';
+const MAX_HISTORY_RECORDS =
+  Number(import.meta.env.VITE_MAX_HISTORY_RECORDS) || 100;
 
 export const useExchangeStore = defineStore('exchange', () => {
   // State
@@ -15,14 +22,19 @@ export const useExchangeStore = defineStore('exchange', () => {
   const loading = ref<boolean>(false);
   const error = ref<string | null>(null);
   const history = ref<ExchangeRecord[]>([]);
-  
+
   // Toast store for notifications
   const toastStore = useToastStore();
   const { t } = useI18n();
 
   // Getters
-  const currencies = computed<SymbolCode[]>(() => ['BTC', 'ETH', 'USDT', 'SOL']);
-  
+  const currencies = computed<SymbolCode[]>(() => [
+    'BTC',
+    'ETH',
+    'USDT',
+    'SOL',
+  ]);
+
   const state = computed<AppState>(() => ({
     ratesUSD: ratesUSD.value,
     lastUpdated: lastUpdated.value,
@@ -57,7 +69,7 @@ export const useExchangeStore = defineStore('exchange', () => {
   const fetchRates = async (showToast: boolean = false): Promise<void> => {
     loading.value = true;
     error.value = null;
-    
+
     try {
       const data = await coinGeckoService.fetchPrices();
       const next: RatesUSD = {
@@ -66,10 +78,10 @@ export const useExchangeStore = defineStore('exchange', () => {
         USDT: data.tether?.usd ?? ratesUSD.value.USDT,
         SOL: data.solana?.usd ?? ratesUSD.value.SOL,
       };
-      
+
       ratesUSD.value = next;
       lastUpdated.value = Date.now();
-      
+
       // Success toast only if explicitly requested
       if (showToast) {
         toastStore.success(
@@ -80,7 +92,7 @@ export const useExchangeStore = defineStore('exchange', () => {
     } catch (err: any) {
       error.value = err?.message ?? 'Failed to fetch rates';
       console.error('Error fetching rates:', err);
-      
+
       // Error toast only if explicitly requested
       if (showToast) {
         toastStore.error(
@@ -93,37 +105,41 @@ export const useExchangeStore = defineStore('exchange', () => {
     }
   };
 
-
-
-  const convert = (from: SymbolCode, to: SymbolCode, amount: number): number => {
+  const convert = (
+    from: SymbolCode,
+    to: SymbolCode,
+    amount: number
+  ): number => {
     if (amount <= 0) return 0;
-    
+
     const fromUSD = ratesUSD.value[from];
     const toUSD = ratesUSD.value[to];
-    
+
     if (!fromUSD || !toUSD) return 0;
-    
+
     const usdValue = amount * fromUSD;
     return usdValue / toUSD;
   };
 
-  const addToHistory = (record: Omit<ExchangeRecord, 'id' | 'timestamp'>): void => {
+  const addToHistory = (
+    record: Omit<ExchangeRecord, 'id' | 'timestamp'>
+  ): void => {
     const id = Math.random().toString(36).slice(2, 10);
     const newRecord: ExchangeRecord = {
       id,
       timestamp: Date.now(),
       ...record,
     };
-    
+
     history.value.unshift(newRecord);
-    
+
     // Keep only last N records to avoid localStorage bloat
     if (history.value.length > MAX_HISTORY_RECORDS) {
       history.value.length = MAX_HISTORY_RECORDS;
     }
-    
+
     persistHistory();
-    
+
     // Success toast for exchange
     toastStore.success(
       t('toast.exchangeExecuted'),
@@ -131,7 +147,7 @@ export const useExchangeStore = defineStore('exchange', () => {
         amount: record.amount,
         from: record.from,
         result: record.result.toFixed(8),
-        to: record.to
+        to: record.to,
       })
     );
   };
@@ -139,7 +155,7 @@ export const useExchangeStore = defineStore('exchange', () => {
   const clearHistory = (): void => {
     history.value = [];
     persistHistory();
-    
+
     // Info toast for clearing history
     toastStore.info(
       t('toast.historyCleared'),
@@ -157,11 +173,11 @@ export const useExchangeStore = defineStore('exchange', () => {
     loading,
     error,
     history,
-    
+
     // Getters
     currencies,
     state,
-    
+
     // Actions
     fetchRates,
     convert,

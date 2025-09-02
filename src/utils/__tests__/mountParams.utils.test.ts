@@ -3,46 +3,46 @@ import { buildCoinGeckoUrl } from '../mountParams.utils';
 
 describe('mountParams.utils', () => {
   describe('buildCoinGeckoUrl', () => {
-      it('should build URL with basic parameters', () => {
-    const params = {
-      ids: 'bitcoin,ethereum',
-      vs_currencies: 'usd',
-    };
+    it('should build URL with basic parameters', () => {
+      const params = {
+        ids: 'bitcoin,ethereum',
+        vs_currencies: 'usd',
+      };
 
-    const url = buildCoinGeckoUrl(params);
+      const url = buildCoinGeckoUrl(params);
 
-    expect(url).toContain('/simple/price');
-    expect(url).toContain('ids=bitcoin%2Cethereum');
-    expect(url).toContain('vs_currencies=usd');
-  });
+      expect(url).toContain('/simple/price');
+      expect(url).toContain('ids=bitcoin%2Cethereum');
+      expect(url).toContain('vs_currencies=usd');
+    });
 
-      it('should build URL with all parameters', () => {
-    const params = {
-      ids: 'bitcoin,ethereum,tether',
-      vs_currencies: 'usd,eur',
-      include_market_cap: 'true',
-      include_24hr_vol: 'true',
-      include_24hr_change: 'true',
-      include_last_updated_at: 'true',
-    };
+    it('should build URL with all parameters', () => {
+      const params = {
+        ids: 'bitcoin,ethereum,tether',
+        vs_currencies: 'usd,eur',
+        include_market_cap: 'true',
+        include_24hr_vol: 'true',
+        include_24hr_change: 'true',
+        include_last_updated_at: 'true',
+      };
 
-    const url = buildCoinGeckoUrl(params);
+      const url = buildCoinGeckoUrl(params);
 
-    expect(url).toContain('ids=bitcoin%2Cethereum%2Ctether');
-    expect(url).toContain('vs_currencies=usd%2Ceur');
-    expect(url).toContain('include_market_cap=true');
-    expect(url).toContain('include_24hr_vol=true');
-    expect(url).toContain('include_24hr_change=true');
-    expect(url).toContain('include_last_updated_at=true');
-  });
+      expect(url).toContain('ids=bitcoin%2Cethereum%2Ctether');
+      expect(url).toContain('vs_currencies=usd%2Ceur');
+      expect(url).toContain('include_market_cap=true');
+      expect(url).toContain('include_24hr_vol=true');
+      expect(url).toContain('include_24hr_change=true');
+      expect(url).toContain('include_last_updated_at=true');
+    });
 
-      it('should handle empty parameters', () => {
-    const params = {};
+    it('should handle empty parameters', () => {
+      const params = {};
 
-    const url = buildCoinGeckoUrl(params);
+      const url = buildCoinGeckoUrl(params);
 
-    expect(url).toContain('/simple/price');
-  });
+      expect(url).toContain('/simple/price');
+    });
 
     it('should handle undefined values', () => {
       const params = {

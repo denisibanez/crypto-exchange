@@ -25,8 +25,8 @@ export const Success: Story = {
       type: 'success',
       title: 'Success!',
       message: 'Operation completed successfully',
-      timestamp: Date.now()
-    }
+      timestamp: Date.now(),
+    },
   },
 };
 
@@ -37,8 +37,8 @@ export const Error: Story = {
       type: 'error',
       title: 'Error!',
       message: 'Something went wrong',
-      timestamp: Date.now()
-    }
+      timestamp: Date.now(),
+    },
   },
 };
 
@@ -49,8 +49,8 @@ export const Warning: Story = {
       type: 'warning',
       title: 'Warning!',
       message: 'Please check your input',
-      timestamp: Date.now()
-    }
+      timestamp: Date.now(),
+    },
   },
 };
 
@@ -61,7 +61,7 @@ export const Info: Story = {
       type: 'info',
       title: 'Information',
       message: 'Here is some useful information',
-      timestamp: Date.now()
-    }
+      timestamp: Date.now(),
+    },
   },
 };

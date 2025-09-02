@@ -15,13 +15,13 @@ export interface QueryParams {
  */
 export function mountParams(baseUrl: string, params: QueryParams = {}): string {
   const url = new URL(baseUrl, window.location.origin);
-  
+
   Object.entries(params).forEach(([key, value]) => {
     if (value !== null && value !== undefined && value !== '') {
       url.searchParams.append(key, String(value));
     }
   });
-  
+
   return url.toString();
 }
 
@@ -31,15 +31,18 @@ export function mountParams(baseUrl: string, params: QueryParams = {}): string {
  * @param params - Object with query parameters
  * @returns Complete URL with query parameters
  */
-export function mountApiParams(baseUrl: string, params: QueryParams = {}): string {
+export function mountApiParams(
+  baseUrl: string,
+  params: QueryParams = {}
+): string {
   const url = new URL(baseUrl);
-  
+
   Object.entries(params).forEach(([key, value]) => {
     if (value !== null && value !== undefined && value !== '') {
       url.searchParams.append(key, String(value));
     }
   });
-  
+
   return url.toString();
 }
 
@@ -49,7 +52,9 @@ export function mountApiParams(baseUrl: string, params: QueryParams = {}): strin
  * @returns Complete CoinGecko API URL
  */
 export function buildCoinGeckoUrl(params: QueryParams = {}): string {
-  const baseUrl = import.meta.env.VITE_COINGECKO_API_URL || 'https://api.coingecko.com/api/v3/simple/price';
+  const baseUrl =
+    import.meta.env.VITE_COINGECKO_API_URL ||
+    'https://api.coingecko.com/api/v3/simple/price';
   return mountApiParams(baseUrl, params);
 }
 
@@ -62,9 +67,9 @@ export function buildCoinGeckoUrl(params: QueryParams = {}): string {
  * @returns Complete URL with pagination
  */
 export function buildPaginatedUrl(
-  baseUrl: string, 
-  page: number = 1, 
-  limit: number = 10, 
+  baseUrl: string,
+  page: number = 1,
+  limit: number = 10,
   additionalParams: QueryParams = {}
 ): string {
   const params = {
@@ -72,6 +77,6 @@ export function buildPaginatedUrl(
     limit: limit.toString(),
     ...additionalParams,
   };
-  
+
   return mountParams(baseUrl, params);
 }

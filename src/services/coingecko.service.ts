@@ -13,15 +13,17 @@ class CoinGeckoService {
 
   private readonly currencies = ['usd'];
 
-  public async fetchPrices(signal?: AbortSignal): Promise<CoinGeckoPriceResponse> {
+  public async fetchPrices(
+    signal?: AbortSignal
+  ): Promise<CoinGeckoPriceResponse> {
     const ids = Object.values(this.coinIds).join(',');
     const vsCurrencies = this.currencies.join(',');
-    
+
     const url = buildCoinGeckoUrl({
       ids,
       vs_currencies: vsCurrencies,
     });
-    
+
     return await apiService.get<CoinGeckoPriceResponse>(url, {
       signal,
     });

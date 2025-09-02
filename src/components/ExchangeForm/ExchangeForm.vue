@@ -8,20 +8,32 @@ import type { ExchangeFormProps } from './types';
 defineProps<ExchangeFormProps>();
 
 const store = useExchangeStore();
-const { from, to, amount, result, canExecute, swapCurrencies, executeExchange } = useExchange();
+const {
+  from,
+  to,
+  amount,
+  result,
+  canExecute,
+  swapCurrencies,
+  executeExchange,
+} = useExchange();
 const { formatCryptoAmount } = useFormatting();
 const { t } = useI18n();
 </script>
 
 <template>
-  <div class="bg-gradient-to-br from-bg-secondary to-bg-tertiary border border-border rounded-xl p-4 shadow-card">
+  <div
+    class="bg-gradient-to-br from-bg-secondary to-bg-tertiary border border-border rounded-xl p-4 shadow-card"
+  >
     <div class="flex items-center justify-between gap-3 mb-4">
-      <h2 class="text-lg font-semibold text-text-primary">{{ t('exchange.title') }}</h2>
-      <button 
-        type="button" 
-        @click="swapCurrencies"
+      <h2 class="text-lg font-semibold text-text-primary">
+        {{ t('exchange.title') }}
+      </h2>
+      <button
+        type="button"
         class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-text-primary bg-transparent border border-border rounded-lg hover:bg-bg-input/50 transition-colors"
         aria-label="Swap currencies"
+        @click="swapCurrencies"
       >
         ⇄ {{ t('exchange.swap') }}
       </button>
@@ -34,14 +46,14 @@ const { t } = useI18n();
           <label for="from" class="block text-sm font-medium text-text-muted">
             {{ t('exchange.from') }}
           </label>
-          <select 
-            id="from" 
+          <select
+            id="from"
             v-model="from"
             class="w-full px-3 py-2 bg-bg-input border border-border rounded-lg text-text-primary focus:border-accent focus:outline-none transition-colors"
           >
-            <option 
-              v-for="currency in store.currencies" 
-              :key="currency" 
+            <option
+              v-for="currency in store.currencies"
+              :key="currency"
               :value="currency"
             >
               {{ currency }}
@@ -53,14 +65,14 @@ const { t } = useI18n();
           <label for="to" class="block text-sm font-medium text-text-muted">
             {{ t('exchange.to') }}
           </label>
-          <select 
-            id="to" 
+          <select
+            id="to"
             v-model="to"
             class="w-full px-3 py-2 bg-bg-input border border-border rounded-lg text-text-primary focus:border-accent focus:outline-none transition-colors"
           >
-            <option 
-              v-for="currency in store.currencies" 
-              :key="currency" 
+            <option
+              v-for="currency in store.currencies"
+              :key="currency"
               :value="currency"
             >
               {{ currency }}
@@ -74,11 +86,11 @@ const { t } = useI18n();
         <label for="amount" class="block text-sm font-medium text-text-muted">
           {{ t('exchange.amount') }}
         </label>
-        <input 
-          id="amount" 
+        <input
+          id="amount"
           v-model.number="amount"
-          type="number" 
-          step="any" 
+          type="number"
+          step="any"
           min="0"
           inputmode="decimal"
           placeholder="0.0"
@@ -88,18 +100,23 @@ const { t } = useI18n();
 
       <!-- Result Display -->
       <div class="space-y-2">
-        <div class="text-sm font-medium text-text-muted">{{ t('exchange.estimated') }}</div>
-        <div class="inline-flex items-center gap-2 px-3 py-2 bg-success/10 border border-success/35 rounded-full text-sm text-success">
-          {{ amount || 0 }} {{ from }} ≈ {{ formatCryptoAmount(result) }} {{ to }}
+        <div class="text-sm font-medium text-text-muted">
+          {{ t('exchange.estimated') }}
+        </div>
+        <div
+          class="inline-flex items-center gap-2 px-3 py-2 bg-success/10 border border-success/35 rounded-full text-sm text-success"
+        >
+          {{ amount || 0 }} {{ from }} ≈ {{ formatCryptoAmount(result) }}
+          {{ to }}
         </div>
       </div>
 
       <!-- Execute Button -->
       <div class="pt-2">
-        <button 
-          @click="executeExchange"
+        <button
           :disabled="!canExecute"
           class="w-full px-4 py-2 bg-bg-button-primary border border-bg-button-primary rounded-lg text-text-primary font-medium hover:bg-bg-button-primary/80 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+          @click="executeExchange"
         >
           {{ t('exchange.execute') }}
         </button>

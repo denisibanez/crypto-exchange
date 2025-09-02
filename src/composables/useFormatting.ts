@@ -1,4 +1,4 @@
-import { computed } from 'vue';
+// import { computed } from 'vue'; // Not used in this composable
 
 export function useFormatting() {
   const formatCurrency = (value: number, decimals: number = 2): string => {
@@ -24,7 +24,11 @@ export function useFormatting() {
     return new Date(timestamp).toLocaleTimeString();
   };
 
-  const formatExchangeRate = (fromUSD: number, toUSD: number, decimals: number = 8): string => {
+  const formatExchangeRate = (
+    fromUSD: number,
+    toUSD: number,
+    decimals: number = 8
+  ): string => {
     if (!fromUSD || !toUSD) return '—';
     const rate = fromUSD / toUSD;
     return formatCryptoAmount(rate, decimals);

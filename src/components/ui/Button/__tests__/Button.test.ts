@@ -9,20 +9,20 @@ describe('Button', () => {
         default: 'Click me',
       },
     });
-    
+
     expect(wrapper.text()).toBe('Click me');
     expect(wrapper.classes()).toContain('bg-bg-button');
   });
 
   it('should render different variants', () => {
     const variants = ['primary', 'secondary', 'ghost', 'danger'] as const;
-    
+
     variants.forEach(variant => {
       const wrapper = mount(Button, {
         props: { variant },
         slots: { default: 'Button' },
       });
-      
+
       if (variant === 'primary') {
         expect(wrapper.classes()).toContain('bg-bg-button-primary');
       } else if (variant === 'secondary') {
@@ -37,19 +37,19 @@ describe('Button', () => {
 
   it('should render different sizes', () => {
     const sizes = ['sm', 'md', 'lg'] as const;
-    
+
     sizes.forEach(size => {
       const wrapper = mount(Button, {
         props: { size },
         slots: { default: 'Button' },
       });
-      
+
       const sizeClasses = {
         sm: 'px-3 py-1.5 text-sm',
         md: 'px-4 py-2 text-base',
         lg: 'px-6 py-3 text-lg',
       };
-      
+
       expect(wrapper.classes()).toContain(sizeClasses[size].split(' ')[0]);
     });
   });
@@ -59,7 +59,7 @@ describe('Button', () => {
       props: { loading: true },
       slots: { default: 'Button' },
     });
-    
+
     expect(wrapper.classes()).toContain('opacity-60');
     expect(wrapper.classes()).toContain('cursor-not-allowed');
   });
@@ -69,7 +69,7 @@ describe('Button', () => {
       props: { disabled: true },
       slots: { default: 'Button' },
     });
-    
+
     expect(wrapper.attributes('disabled')).toBeDefined();
     expect(wrapper.classes()).toContain('opacity-60');
     expect(wrapper.classes()).toContain('cursor-not-allowed');
@@ -79,9 +79,9 @@ describe('Button', () => {
     const wrapper = mount(Button, {
       slots: { default: 'Button' },
     });
-    
+
     await wrapper.trigger('click');
-    
+
     expect(wrapper.emitted('click')).toBeTruthy();
   });
 
@@ -90,9 +90,9 @@ describe('Button', () => {
       props: { disabled: true },
       slots: { default: 'Button' },
     });
-    
+
     await wrapper.trigger('click');
-    
+
     expect(wrapper.emitted('click')).toBeFalsy();
   });
 
@@ -101,9 +101,9 @@ describe('Button', () => {
       props: { loading: true },
       slots: { default: 'Button' },
     });
-    
+
     await wrapper.trigger('click');
-    
+
     expect(wrapper.emitted('click')).toBeFalsy();
   });
 });

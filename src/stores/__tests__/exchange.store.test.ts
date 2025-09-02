@@ -45,7 +45,7 @@ describe('useExchangeStore', () => {
 
   it('should initialize with default values', () => {
     const store = useExchangeStore();
-    
+
     expect(store.ratesUSD).toEqual({ BTC: 0, ETH: 0, USDT: 1, SOL: 0 });
     expect(store.lastUpdated).toBeNull();
     expect(store.loading).toBe(false);
@@ -55,7 +55,7 @@ describe('useExchangeStore', () => {
 
   it('should have correct currencies', () => {
     const store = useExchangeStore();
-    
+
     expect(store.currencies).toEqual(['BTC', 'ETH', 'USDT', 'SOL']);
   });
 
@@ -66,13 +66,18 @@ describe('useExchangeStore', () => {
       tether: { usd: 1 },
       solana: { usd: 100 },
     };
-    
+
     vi.mocked(coinGeckoService.fetchPrices).mockResolvedValue(mockData);
-    
+
     const store = useExchangeStore();
     await store.fetchRates();
-    
-    expect(store.ratesUSD).toEqual({ BTC: 45000, ETH: 3000, USDT: 1, SOL: 100 });
+
+    expect(store.ratesUSD).toEqual({
+      BTC: 45000,
+      ETH: 3000,
+      USDT: 1,
+      SOL: 100,
+    });
     expect(store.lastUpdated).toBeTypeOf('number');
     expect(store.loading).toBe(false);
     expect(store.error).toBeNull();
@@ -80,11 +85,13 @@ describe('useExchangeStore', () => {
 
   it('should handle fetch rates error', async () => {
     const errorMessage = 'Network error';
-    vi.mocked(coinGeckoService.fetchPrices).mockRejectedValue(new Error(errorMessage));
-    
+    vi.mocked(coinGeckoService.fetchPrices).mockRejectedValue(
+      new Error(errorMessage)
+    );
+
     const store = useExchangeStore();
     await store.fetchRates();
-    
+
     expect(store.error).toBe(errorMessage);
     expect(store.loading).toBe(false);
   });
@@ -99,9 +106,9 @@ describe('useExchangeStore', () => {
       fromUSD: 45000,
       toUSD: 3000,
     };
-    
+
     store.addToHistory(record);
-    
+
     expect(store.history).toHaveLength(1);
     expect(store.history[0]).toMatchObject({
       ...record,
@@ -112,7 +119,7 @@ describe('useExchangeStore', () => {
 
   it('should clear history', () => {
     const store = useExchangeStore();
-    
+
     // Add some history first
     store.addToHistory({
       from: 'BTC',
@@ -122,17 +129,17 @@ describe('useExchangeStore', () => {
       fromUSD: 45000,
       toUSD: 3000,
     });
-    
+
     expect(store.history).toHaveLength(1);
-    
+
     store.clearHistory();
-    
+
     expect(store.history).toEqual([]);
   });
 
   it('should limit history to max records', () => {
     const store = useExchangeStore();
-    
+
     // Add more than max records
     for (let i = 0; i < 105; i++) {
       store.addToHistory({
@@ -144,13 +151,13 @@ describe('useExchangeStore', () => {
         toUSD: 3000,
       });
     }
-    
+
     expect(store.history).toHaveLength(100);
   });
 
   it('should calculate state correctly', () => {
     const store = useExchangeStore();
-    
+
     expect(store.state).toEqual({
       ratesUSD: { BTC: 0, ETH: 0, USDT: 1, SOL: 0 },
       lastUpdated: null,
@@ -158,12 +165,17 @@ describe('useExchangeStore', () => {
       error: null,
       history: [],
     });
-    
+
     // Add some data
     store.ratesUSD = { BTC: 45000, ETH: 3000, USDT: 1, SOL: 100 };
     store.lastUpdated = Date.now();
-    
-    expect(store.state.ratesUSD).toEqual({ BTC: 45000, ETH: 3000, USDT: 1, SOL: 100 });
+
+    expect(store.state.ratesUSD).toEqual({
+      BTC: 45000,
+      ETH: 3000,
+      USDT: 1,
+      SOL: 100,
+    });
     expect(store.state.lastUpdated).toBeTypeOf('number');
   });
 });

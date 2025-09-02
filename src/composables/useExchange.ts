@@ -4,14 +4,14 @@ import type { SymbolCode } from '@/types/global';
 
 export function useExchange() {
   const store = useExchangeStore();
-  
+
   const from = ref<SymbolCode>('BTC');
   const to = ref<SymbolCode>('ETH');
   const amount = ref<number>(1);
 
   const result = computed(() => {
-    return Number.isFinite(amount.value) 
-      ? store.convert(from.value, to.value, Number(amount.value)) 
+    return Number.isFinite(amount.value)
+      ? store.convert(from.value, to.value, Number(amount.value))
       : 0;
   });
 
@@ -39,7 +39,7 @@ export function useExchange() {
   };
 
   // Keep amount positive numbers only
-  watch(amount, (val) => {
+  watch(amount, val => {
     if (typeof val !== 'number') return;
     if (val < 0) amount.value = Math.abs(val);
   });
@@ -49,11 +49,11 @@ export function useExchange() {
     from,
     to,
     amount,
-    
+
     // Computed
     result,
     canExecute,
-    
+
     // Actions
     swapCurrencies,
     executeExchange,

@@ -11,20 +11,13 @@ const handleClose = (id: string) => {
 
 <template>
   <div class="fixed top-4 right-4 z-50 space-y-3 pointer-events-none">
-    <TransitionGroup
-      name="toast"
-      tag="div"
-      class="space-y-3"
-    >
+    <TransitionGroup name="toast" tag="div" class="space-y-3">
       <div
         v-for="toast in toastStore.toasts"
         :key="toast.id"
         class="pointer-events-auto"
       >
-        <Toast
-          :toast="toast"
-          @close="handleClose"
-        />
+        <Toast :toast="toast" @close="handleClose" />
       </div>
     </TransitionGroup>
   </div>

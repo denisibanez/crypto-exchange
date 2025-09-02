@@ -46,8 +46,8 @@ const getStatusText = () => {
           <StatusBadge :status="getStatusType()">
             {{ getStatusText() }}
           </StatusBadge>
-          <Button 
-            variant="ghost" 
+          <Button
+            variant="ghost"
             size="sm"
             :loading="store.loading"
             @click="() => store.fetchRates(true)"
@@ -64,7 +64,7 @@ const getStatusText = () => {
           <RateTable />
           <HistoryList />
         </div>
-        
+
         <!-- Right Column -->
         <div>
           <ExchangeForm />
@@ -76,13 +76,13 @@ const getStatusText = () => {
         {{ t('footer.description') }}
       </p>
     </div>
-    
+
     <!-- Page Loader -->
-    <PageLoader 
-      :loading="store.loading && !store.lastUpdated" 
+    <PageLoader
+      :loading="store.loading && !store.lastUpdated"
       message="Loading cryptocurrency prices..."
     />
-    
+
     <!-- Toast Container -->
     <ToastContainer />
   </div>

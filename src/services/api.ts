@@ -1,4 +1,8 @@
-import axios, { type AxiosInstance, type AxiosRequestConfig, type AxiosResponse } from 'axios';
+import axios, {
+  type AxiosInstance,
+  type AxiosRequestConfig,
+  type AxiosResponse,
+} from 'axios';
 import type { ApiConfig, ApiError } from '@/types/api';
 import { useToastStore } from '@/stores/toast.store';
 
@@ -13,17 +17,19 @@ class ApiService {
   private setupInterceptors(): void {
     // Request interceptor
     this.instance.interceptors.request.use(
-      (config) => {
+      config => {
         // Add auth token if available
         // const token = localStorage.getItem('auth_token');
         // if (token) {
         //   config.headers.Authorization = `Bearer ${token}`;
         // }
-        
-        console.log(`🚀 API Request: ${config.method?.toUpperCase()} ${config.url}`);
+
+        console.log(
+          `🚀 API Request: ${config.method?.toUpperCase()} ${config.url}`
+        );
         return config;
       },
-      (error) => {
+      error => {
         console.error('❌ Request Error:', error);
         return Promise.reject(error);
       }
@@ -32,12 +38,17 @@ class ApiService {
     // Response interceptor
     this.instance.interceptors.response.use(
       (response: AxiosResponse) => {
-        console.log(`✅ API Response: ${response.status} ${response.config.url}`);
+        console.log(
+          `✅ API Response: ${response.status} ${response.config.url}`
+        );
         return response;
       },
-      (error) => {
+      error => {
         const apiError: ApiError = {
-          message: error.response?.data?.message || error.message || 'An error occurred',
+          message:
+            error.response?.data?.message ||
+            error.message ||
+            'An error occurred',
           status: error.response?.status,
           code: error.code,
         };
@@ -53,16 +64,28 @@ class ApiService {
           toastStore.error('Unauthorized', 'Please check your credentials');
         } else if (error.response?.status === 403) {
           console.warn('🚫 Forbidden access detected');
-          toastStore.error('Access Denied', 'You do not have permission to access this resource');
+          toastStore.error(
+            'Access Denied',
+            'You do not have permission to access this resource'
+          );
         } else if (error.response?.status === 404) {
           toastStore.error('Not Found', 'The requested resource was not found');
         } else if (error.response?.status >= 500) {
-          toastStore.error('Server Error', 'Something went wrong on our end. Please try again later.');
+          toastStore.error(
+            'Server Error',
+            'Something went wrong on our end. Please try again later.'
+          );
         } else if (error.code === 'ECONNABORTED') {
           apiError.message = 'Request timeout - please try again';
-          toastStore.error('Request Timeout', 'The request took too long. Please try again.');
+          toastStore.error(
+            'Request Timeout',
+            'The request took too long. Please try again.'
+          );
         } else if (error.code === 'NETWORK_ERROR') {
-          toastStore.error('Network Error', 'Please check your internet connection');
+          toastStore.error(
+            'Network Error',
+            'Please check your internet connection'
+          );
         } else {
           // Generic error toast for other cases
           toastStore.error('Request Failed', apiError.message);
@@ -78,12 +101,20 @@ class ApiService {
     return response.data;
   }
 
-  public async post<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
+  public async post<T>(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ): Promise<T> {
     const response = await this.instance.post<T>(url, data, config);
     return response.data;
   }
 
-  public async put<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
+  public async put<T>(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ): Promise<T> {
     const response = await this.instance.put<T>(url, data, config);
     return response.data;
   }
@@ -96,7 +127,9 @@ class ApiService {
 
 // Create API instance with configuration
 const apiConfig: ApiConfig = {
-  baseURL: import.meta.env.VITE_COINGECKO_API_URL || 'https://api.coingecko.com/api/v3/simple/price',
+  baseURL:
+    import.meta.env.VITE_COINGECKO_API_URL ||
+    'https://api.coingecko.com/api/v3/simple/price',
   timeout: Number(import.meta.env.VITE_API_TIMEOUT) || 10000,
   headers: {
     'Content-Type': 'application/json',

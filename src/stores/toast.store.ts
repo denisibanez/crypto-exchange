@@ -38,19 +38,35 @@ export const useToastStore = defineStore('toast', () => {
   };
 
   // Convenience methods
-  const success = (title: string, message?: string, options?: Partial<ToastOptions>): string => {
+  const success = (
+    title: string,
+    message?: string,
+    options?: Partial<ToastOptions>
+  ): string => {
     return addToast({ type: 'success', title, message, ...options });
   };
 
-  const error = (title: string, message?: string, options?: Partial<ToastOptions>): string => {
+  const error = (
+    title: string,
+    message?: string,
+    options?: Partial<ToastOptions>
+  ): string => {
     return addToast({ type: 'error', title, message, ...options });
   };
 
-  const warning = (title: string, message?: string, options?: Partial<ToastOptions>): string => {
+  const warning = (
+    title: string,
+    message?: string,
+    options?: Partial<ToastOptions>
+  ): string => {
     return addToast({ type: 'warning', title, message, ...options });
   };
 
-  const info = (title: string, message?: string, options?: Partial<ToastOptions>): string => {
+  const info = (
+    title: string,
+    message?: string,
+    options?: Partial<ToastOptions>
+  ): string => {
     return addToast({ type: 'info', title, message, ...options });
   };
 

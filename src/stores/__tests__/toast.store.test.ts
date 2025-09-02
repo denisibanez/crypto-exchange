@@ -9,15 +9,15 @@ describe('useToastStore', () => {
 
   it('should initialize with empty toasts', () => {
     const store = useToastStore();
-    
+
     expect(store.toasts).toEqual([]);
   });
 
   it('should add success toast', () => {
     const store = useToastStore();
-    
+
     store.success('Success Title', 'Success message');
-    
+
     expect(store.toasts).toHaveLength(1);
     expect(store.toasts[0]).toMatchObject({
       type: 'success',
@@ -31,9 +31,9 @@ describe('useToastStore', () => {
 
   it('should add error toast', () => {
     const store = useToastStore();
-    
+
     store.error('Error Title', 'Error message');
-    
+
     expect(store.toasts).toHaveLength(1);
     expect(store.toasts[0]).toMatchObject({
       type: 'error',
@@ -44,9 +44,9 @@ describe('useToastStore', () => {
 
   it('should add warning toast', () => {
     const store = useToastStore();
-    
+
     store.warning('Warning Title', 'Warning message');
-    
+
     expect(store.toasts).toHaveLength(1);
     expect(store.toasts[0]).toMatchObject({
       type: 'warning',
@@ -57,9 +57,9 @@ describe('useToastStore', () => {
 
   it('should add info toast', () => {
     const store = useToastStore();
-    
+
     store.info('Info Title', 'Info message');
-    
+
     expect(store.toasts).toHaveLength(1);
     expect(store.toasts[0]).toMatchObject({
       type: 'info',
@@ -70,24 +70,24 @@ describe('useToastStore', () => {
 
   it('should remove toast by id', () => {
     const store = useToastStore();
-    
+
     store.success('Title', 'Message');
     const toastId = store.toasts[0].id;
-    
+
     expect(store.toasts).toHaveLength(1);
-    
+
     store.removeToast(toastId);
-    
+
     expect(store.toasts).toHaveLength(0);
   });
 
   it('should handle multiple toasts', () => {
     const store = useToastStore();
-    
+
     store.success('Success', 'Success message');
     store.error('Error', 'Error message');
     store.warning('Warning', 'Warning message');
-    
+
     expect(store.toasts).toHaveLength(3);
     expect(store.toasts[0].type).toBe('success');
     expect(store.toasts[1].type).toBe('error');
@@ -96,18 +96,18 @@ describe('useToastStore', () => {
 
   it('should generate unique ids for toasts', () => {
     const store = useToastStore();
-    
+
     store.success('Title 1', 'Message 1');
     store.success('Title 2', 'Message 2');
-    
+
     expect(store.toasts[0].id).not.toBe(store.toasts[1].id);
   });
 
   it('should set correct duration', () => {
     const store = useToastStore();
-    
+
     store.success('Title', 'Message');
-    
+
     expect(store.toasts[0].duration).toBe(5000);
   });
 });

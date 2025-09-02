@@ -23,7 +23,7 @@ export const Success: Story = {
   args: {
     status: 'success',
   },
-  render: (args) => ({
+  render: args => ({
     components: { StatusBadge },
     setup() {
       return { args };
@@ -36,7 +36,7 @@ export const Error: Story = {
   args: {
     status: 'error',
   },
-  render: (args) => ({
+  render: args => ({
     components: { StatusBadge },
     setup() {
       return { args };
@@ -49,7 +49,7 @@ export const Warning: Story = {
   args: {
     status: 'warning',
   },
-  render: (args) => ({
+  render: args => ({
     components: { StatusBadge },
     setup() {
       return { args };
@@ -62,7 +62,7 @@ export const Info: Story = {
   args: {
     status: 'info',
   },
-  render: (args) => ({
+  render: args => ({
     components: { StatusBadge },
     setup() {
       return { args };
