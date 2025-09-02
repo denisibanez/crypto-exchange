@@ -78,6 +78,18 @@ npm run build
 
 # Run Storybook
 npm run storybook
+
+# Run unit tests
+npm run test
+
+# Run tests with UI
+npm run test:ui
+
+# Run tests once
+npm run test:run
+
+# Run tests with coverage
+npm run test:coverage
 ```
 
 ## 🏗 Project Structure
@@ -95,7 +107,7 @@ crypto-exchange/
 │  │  │  ├─ Toast/       # Toast notification component
 │  │  │  ├─ ToastContainer/ # Toast container
 │  │  │  ├─ PageLoader/  # Page loading overlay
-│  │  │  └─ LanguageSelector/ # Language switcher
+Language switcher
 │  │  ├─ RateTable/      # Rate table component
 │  │  ├─ ExchangeForm/   # Exchange form component
 │  │  └─ HistoryList/    # History list component
@@ -214,7 +226,7 @@ GET https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether,so
 - **Toast notifications** in user's selected language
 - **Persistent language** preference
 
-## 🧪 Code Quality
+## 🧪 Code Quality & Testing
 
 - **ESLint** configuration for Vue 3 + TypeScript
 - **Prettier** for consistent code formatting
@@ -223,6 +235,11 @@ GET https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether,so
 - **Path aliases** for clean imports
 - **Storybook** for isolated component development
 - **Lint-staged** for pre-commit code quality checks
+- **Vitest** for unit testing with Vue Test Utils
+- **Testing Library** for component testing
+- **JSDOM** for DOM simulation in tests
+- **69 unit tests** covering all components, stores, composables, and services
+- **Test coverage** for business logic, UI components, and API integration
 
 ## 🌍 Internationalization
 
@@ -257,7 +274,7 @@ The app supports multiple languages with Vue i18n:
 The project includes comprehensive Storybook integration with stories for all components:
 
 ### Component Stories
-- **UI Components**: Button, StatusBadge, Toast, ToastContainer, PageLoader, LanguageSelector
+- **UI Components**: Button, StatusBadge, Toast, ToastContainer, PageLoader, 
 - **Main Components**: RateTable, ExchangeForm, HistoryList
 - **Views**: Home, NotFound
 
@@ -278,6 +295,55 @@ The project includes comprehensive Storybook integration with stories for all co
 ```bash
 npm run storybook        # Start Storybook dev server
 npm run build-storybook  # Build static Storybook
+```
+
+## 🧪 Unit Testing
+
+The project includes comprehensive unit testing with Vitest:
+
+### Test Coverage
+- **69 unit tests** covering all major functionality
+- **Components**: UI components, main components, and views
+- **Stores**: Pinia stores with mocked dependencies
+- **Composables**: Business logic and utility functions
+- **Services**: API integration with mocked HTTP calls
+- **Utils**: Helper functions and utilities
+
+### Test Structure
+```
+src/
+├─ components/
+│  ├─ ui/Button/__tests__/Button.test.ts
+│  ├─ ui/StatusBadge/__tests__/StatusBadge.test.ts
+│  ├─ RateTable/__tests__/RateTable.test.ts
+│  ├─ ExchangeForm/__tests__/ExchangeForm.test.ts
+│  └─ HistoryList/__tests__/HistoryList.test.ts
+├─ stores/__tests__/
+│  ├─ exchange.store.test.ts
+│  └─ toast.store.test.ts
+├─ composables/__tests__/
+│  ├─ useExchange.test.ts
+│  └─ useFormatting.test.ts
+├─ services/__tests__/
+│  └─ coingecko.service.test.ts
+└─ utils/__tests__/
+   └─ mountParams.utils.test.ts
+```
+
+### Test Features
+- **Mocked dependencies** for isolated testing
+- **Vue Test Utils** for component testing
+- **Testing Library** for user-centric testing
+- **JSDOM** for DOM simulation
+- **Coverage reporting** with detailed metrics
+- **Fast execution** with Vitest's optimized runner
+
+### Test Commands
+```bash
+npm run test           # Run tests in watch mode
+npm run test:ui        # Run tests with UI interface
+npm run test:run       # Run tests once
+npm run test:coverage  # Run tests with coverage report
 ```
 
 ## 📄 License
